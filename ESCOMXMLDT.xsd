@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://www.cefic.org/ESCOMXML" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ESCOMXML="http://www.cefic.org/ESCOMXML" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="2.0">
+	<xs:simpleType name="SubstanceMixtureIndicator">
+		<xs:annotation>
+			<xs:documentation>Specifies the product types.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MIXTURE"/>
+			<xs:enumeration value="SUBSTANCE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UUID">
+		<xs:annotation>
+			<xs:documentation>Specifies an identification string in order to uniquely identify information. The length of the identification string is between 32 and 36 characters (32 alphanumeric characters and four hyphens in the form 8-4-4-4-12). The 32 alphanumeric characters based UUID specifies the internal presentation, the UUID with 36 alphanumeric characters is the external representation. Within ESComXML only the internal 32 alphanumeric characters long UUID is supported.
+
+For example:
+550e8400e29b41d4a716446655440000 (external representation with four hypens:
+550e8400-e29b-41d4-a716-446655440000). 
+
+See also the Wikipedia page for more details:
+http://en.wikipedia.org/wiki/Universally_unique_identifier</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="32"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VersionNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies a version number as a digit-number with an optional point in between.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="(\d+\.)?(\d+\.)?(\*|\d+)"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DUNSNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies the Data Universal Numbering System (DUNS) number. It is a system developed and regulated by Dun &amp; Bradstreet (D&amp;B) that assigns a unique numeric identifier, referred to as a "DUNS number" to a single business entity.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="String255">
+		<xs:annotation>
+			<xs:documentation>Specifies the string with a maximum 255 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericValue">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric value that is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	<xs:complexType name="RiskManagementMeasureHH">
+		<xs:annotation>
+			<xs:documentation>A risk management measure for a use relevant to workers or consumers (human health).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeasurePhrase" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessDermalInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the degree in % to which the measure to prevent skin exposure is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessInhalationInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the degree in % to which the measure to prevent inhalation-related exposure is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EmailAddress">
+		<xs:annotation>
+			<xs:documentation>Specifies a valid e-mail address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="REACHRegNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies the standard Registration, Evaluation, Authorisation and Restriction of Chemicals (REACH) number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2}-[0-9]{10}-[0-9]{2}(-[0-9]{4})?"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="NumericValueWithUnitAndQualifier">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric value with unit and qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Qualifier" type="ESCOMXML:NumericQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the qualifier of the value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="ESCOMXML:NumericValue" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unit" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NumericValueWithQualifier">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric value with qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="ESCOMXML:NumericValue" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Qualifier" type="ESCOMXML:NumericQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the qualifier of the value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="LanguageCode">
+		<xs:annotation>
+			<xs:documentation>The language code of the country used to describe textual information.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:language">
+			<xs:enumeration value="aa"/>
+			<xs:enumeration value="ab"/>
+			<xs:enumeration value="ae"/>
+			<xs:enumeration value="af"/>
+			<xs:enumeration value="ak"/>
+			<xs:enumeration value="am"/>
+			<xs:enumeration value="an"/>
+			<xs:enumeration value="ar"/>
+			<xs:enumeration value="as"/>
+			<xs:enumeration value="av"/>
+			<xs:enumeration value="ay"/>
+			<xs:enumeration value="az"/>
+			<xs:enumeration value="ba"/>
+			<xs:enumeration value="be"/>
+			<xs:enumeration value="bg"/>
+			<xs:enumeration value="bh"/>
+			<xs:enumeration value="bi"/>
+			<xs:enumeration value="bm"/>
+			<xs:enumeration value="bn"/>
+			<xs:enumeration value="bo"/>
+			<xs:enumeration value="br"/>
+			<xs:enumeration value="bs"/>
+			<xs:enumeration value="ca"/>
+			<xs:enumeration value="ce"/>
+			<xs:enumeration value="ch"/>
+			<xs:enumeration value="co"/>
+			<xs:enumeration value="cr"/>
+			<xs:enumeration value="cs"/>
+			<xs:enumeration value="cu"/>
+			<xs:enumeration value="cv"/>
+			<xs:enumeration value="cy"/>
+			<xs:enumeration value="da"/>
+			<xs:enumeration value="de"/>
+			<xs:enumeration value="dv"/>
+			<xs:enumeration value="dz"/>
+			<xs:enumeration value="ee"/>
+			<xs:enumeration value="el"/>
+			<xs:enumeration value="en"/>
+			<xs:enumeration value="eo"/>
+			<xs:enumeration value="es"/>
+			<xs:enumeration value="et"/>
+			<xs:enumeration value="eu"/>
+			<xs:enumeration value="fa"/>
+			<xs:enumeration value="ff"/>
+			<xs:enumeration value="fi"/>
+			<xs:enumeration value="fj"/>
+			<xs:enumeration value="fo"/>
+			<xs:enumeration value="fr"/>
+			<xs:enumeration value="fy"/>
+			<xs:enumeration value="ga"/>
+			<xs:enumeration value="gd"/>
+			<xs:enumeration value="gl"/>
+			<xs:enumeration value="gn"/>
+			<xs:enumeration value="gu"/>
+			<xs:enumeration value="gv"/>
+			<xs:enumeration value="ha"/>
+			<xs:enumeration value="he"/>
+			<xs:enumeration value="hi"/>
+			<xs:enumeration value="ho"/>
+			<xs:enumeration value="hr"/>
+			<xs:enumeration value="ht"/>
+			<xs:enumeration value="hu"/>
+			<xs:enumeration value="hy"/>
+			<xs:enumeration value="hz"/>
+			<xs:enumeration value="ia"/>
+			<xs:enumeration value="id"/>
+			<xs:enumeration value="ie"/>
+			<xs:enumeration value="ig"/>
+			<xs:enumeration value="ii"/>
+			<xs:enumeration value="ik"/>
+			<xs:enumeration value="io"/>
+			<xs:enumeration value="is"/>
+			<xs:enumeration value="it"/>
+			<xs:enumeration value="iu"/>
+			<xs:enumeration value="ja"/>
+			<xs:enumeration value="jv"/>
+			<xs:enumeration value="ka"/>
+			<xs:enumeration value="kg"/>
+			<xs:enumeration value="ki"/>
+			<xs:enumeration value="kj"/>
+			<xs:enumeration value="kk"/>
+			<xs:enumeration value="kl"/>
+			<xs:enumeration value="km"/>
+			<xs:enumeration value="kn"/>
+			<xs:enumeration value="ko"/>
+			<xs:enumeration value="kr"/>
+			<xs:enumeration value="ks"/>
+			<xs:enumeration value="ku"/>
+			<xs:enumeration value="kv"/>
+			<xs:enumeration value="kw"/>
+			<xs:enumeration value="ky"/>
+			<xs:enumeration value="la"/>
+			<xs:enumeration value="lb"/>
+			<xs:enumeration value="lg"/>
+			<xs:enumeration value="li"/>
+			<xs:enumeration value="ln"/>
+			<xs:enumeration value="lo"/>
+			<xs:enumeration value="lt"/>
+			<xs:enumeration value="lu"/>
+			<xs:enumeration value="lv"/>
+			<xs:enumeration value="mg"/>
+			<xs:enumeration value="mh"/>
+			<xs:enumeration value="mi"/>
+			<xs:enumeration value="mk"/>
+			<xs:enumeration value="ml"/>
+			<xs:enumeration value="mn"/>
+			<xs:enumeration value="mr"/>
+			<xs:enumeration value="ms"/>
+			<xs:enumeration value="mt"/>
+			<xs:enumeration value="my"/>
+			<xs:enumeration value="na"/>
+			<xs:enumeration value="nb"/>
+			<xs:enumeration value="nd"/>
+			<xs:enumeration value="ne"/>
+			<xs:enumeration value="ng"/>
+			<xs:enumeration value="nl"/>
+			<xs:enumeration value="nn"/>
+			<xs:enumeration value="no"/>
+			<xs:enumeration value="nr"/>
+			<xs:enumeration value="nv"/>
+			<xs:enumeration value="ny"/>
+			<xs:enumeration value="oc"/>
+			<xs:enumeration value="oj"/>
+			<xs:enumeration value="om"/>
+			<xs:enumeration value="or"/>
+			<xs:enumeration value="os"/>
+			<xs:enumeration value="pa"/>
+			<xs:enumeration value="pi"/>
+			<xs:enumeration value="pl"/>
+			<xs:enumeration value="ps"/>
+			<xs:enumeration value="pt"/>
+			<xs:enumeration value="qu"/>
+			<xs:enumeration value="rm"/>
+			<xs:enumeration value="rn"/>
+			<xs:enumeration value="ro"/>
+			<xs:enumeration value="ru"/>
+			<xs:enumeration value="rw"/>
+			<xs:enumeration value="sa"/>
+			<xs:enumeration value="sc"/>
+			<xs:enumeration value="sd"/>
+			<xs:enumeration value="se"/>
+			<xs:enumeration value="sg"/>
+			<xs:enumeration value="si"/>
+			<xs:enumeration value="sk"/>
+			<xs:enumeration value="sl"/>
+			<xs:enumeration value="sm"/>
+			<xs:enumeration value="sn"/>
+			<xs:enumeration value="so"/>
+			<xs:enumeration value="sq"/>
+			<xs:enumeration value="sr"/>
+			<xs:enumeration value="ss"/>
+			<xs:enumeration value="st"/>
+			<xs:enumeration value="su"/>
+			<xs:enumeration value="sv"/>
+			<xs:enumeration value="sw"/>
+			<xs:enumeration value="ta"/>
+			<xs:enumeration value="te"/>
+			<xs:enumeration value="tg"/>
+			<xs:enumeration value="th"/>
+			<xs:enumeration value="ti"/>
+			<xs:enumeration value="tk"/>
+			<xs:enumeration value="tl"/>
+			<xs:enumeration value="tn"/>
+			<xs:enumeration value="to"/>
+			<xs:enumeration value="tr"/>
+			<xs:enumeration value="ts"/>
+			<xs:enumeration value="tt"/>
+			<xs:enumeration value="tw"/>
+			<xs:enumeration value="ty"/>
+			<xs:enumeration value="ug"/>
+			<xs:enumeration value="uk"/>
+			<xs:enumeration value="ur"/>
+			<xs:enumeration value="uz"/>
+			<xs:enumeration value="ve"/>
+			<xs:enumeration value="vi"/>
+			<xs:enumeration value="vo"/>
+			<xs:enumeration value="wa"/>
+			<xs:enumeration value="wo"/>
+			<xs:enumeration value="xh"/>
+			<xs:enumeration value="yi"/>
+			<xs:enumeration value="yo"/>
+			<xs:enumeration value="za"/>
+			<xs:enumeration value="zh"/>
+			<xs:enumeration value="zu"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies the order of an exposure scenario (or contributing scenario) within in the annex of the extended safety data sheet. It is represented as an unsigned integer value with a maximum of 5 digits in total.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="RiskManagementMeasureGeneric">
+		<xs:annotation>
+			<xs:documentation>Specifies a generic risk management measure.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeasurePhrase" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the operational condition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the effectiveness of sewage treatment conditions. Specifies the value in a percentage of a substance which is removed from waste water by the sewage treatment plant.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CASString">
+		<xs:annotation>
+			<xs:documentation>Specifies the Chemical Abstracts Service (CAS) identification string for a substance.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{2,7}-[0-9]{2}-[0-9]{1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ECNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies the standard European Commision (EC) identification string for a substance.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]{3}-[0-9]{3}-[0-9]{1}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ESComXMLVersionNumber">
+		<xs:annotation>
+			<xs:documentation>Specifies the ESComXML version number for which the XML file is valid.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="2.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UseCondQuantitative">
+		<xs:annotation>
+			<xs:documentation>An operational condition of a use specified as a phrase with a value. The value is a numeric value with qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.
+
+Note that this data element does not provide details about the unit of measure to which the numeric value belongs. The operational condition, which the data element uses, defines the unit of measure.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ConditionPhrase" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the operational condition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="ESCOMXML:NumericValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A numerical value with unit and qualifier that quantifies (associates a value) the condition phrase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NumericValueWithUnit">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric value with unit.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="ESCOMXML:NumericValue" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes either the efficiency or accuracy values of an attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unit" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the efficiency unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="String1000">
+		<xs:annotation>
+			<xs:documentation>Specifies the string with a maximum 1000 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="Phrase">
+		<xs:annotation>
+			<xs:documentation>Describes a phrase represented by a phrase identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PhraseID" type="integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the unique phrase identifier typically from the European Standard Phrase Catalogue (EuPhraC) and its ESCom subset.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskManagementMeasureEnv">
+		<xs:annotation>
+			<xs:documentation>A risk management measure related to the environment.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeasurePhrase" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessAirInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the measure and the degree in % to which the measure to reduce the release to air is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessSoilInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the measure and the degree in % to which the measure to reduce the release to soil is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessWaterlInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the measure and the degree in % to which the measure to reduce the release to water is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="dateTime">
+		<xs:annotation>
+			<xs:documentation>Specifies a timestamp</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:complexType name="UseCondMeasureEnv">
+		<xs:annotation>
+			<xs:documentation>A use condition with effectiveness (risk management measure) for a use relevant to the environment and waste.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ESSectionSubHeader" type="ESCOMXML:ESSectionSubHeader" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>An enumeration that defines the heading within section 2 of the exposure scenario for communication to which the condition or measure is assigned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the type of an operational condition or a risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConditionMeasure" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the condition of use or the risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NumericValue" type="ESCOMXML:NumericValueWithUnitAndQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A numerical value with unit and qualifier that quantifies (associates a value) the condition phrase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessAirInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure to reduce the release to air  is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessSoilInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure to reduce the release to soil is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessWaterInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure to reduce the release to water is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessWasteInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure to reduce the release to waste is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CountryCode">
+		<xs:annotation>
+			<xs:documentation>Defines a country code (e.g. DE, BE).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="EffectivenessValueWithQualifier">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric value with qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Value" type="ESCOMXML:EffectivenessValue" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the effectiveness value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Qualifier" type="ESCOMXML:NumericQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the qualifier of the value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="EffectivenessValue">
+		<xs:annotation>
+			<xs:documentation>Specifies a decimal-based effectiveness value with a given range between 0.001 and 100. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="3"/>
+			<xs:maxInclusive value="100"/>
+			<xs:minInclusive value="0"/>
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UseCondMeasureHH">
+		<xs:annotation>
+			<xs:documentation>A use condition with effectiveness (risk management measure) for a use relevant to human health.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ESSectionSubHeader" type="ESCOMXML:ESSectionSubHeader" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>An enumeration that defines the heading within section 2 of the exposure scenario for communication to which the condition or measure is assigned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the type of an operational condition or a risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConditionMeasure" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the condition of use or the risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NumericValue" type="ESCOMXML:NumericValueWithUnitAndQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A numerical value with unit and qualifier that quantifies (associates a value) the condition phrase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessDermalInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure against risk through skin exposure is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessInhalationInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the degree in % to which the measure against risk through inhalation is effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NumericIntervalWithUnitAndQualifier">
+		<xs:annotation>
+			<xs:documentation>Specifies a numeric interval with unit and qualifier. The numeric values (lower and upper limit value) are patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Lower" type="ESCOMXML:NumericValue" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the lower value of the interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LowerQualifier" type="ESCOMXML:NumericQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the qualifier of the lower value of the interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unit" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the unit used in the interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Upper" type="ESCOMXML:NumericValue" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the upper value of the interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UpperQualifier" type="ESCOMXML:NumericQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the qualifier of the upper value of the interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Average" type="ESCOMXML:NumericValue" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Specifies the average value for an interval.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UseCondQuantitativeWithUnitAndQual">
+		<xs:annotation>
+			<xs:documentation>An operational condition of a use specified as a phrase with a value. The value is a numeric value with unit and qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ConditionPhrase" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the operational condition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="ESCOMXML:NumericValueWithUnitAndQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A numerical value with unit and qualifier that quantifies (associates a value) the condition phrase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RiskManagementMeasureWaste">
+		<xs:annotation>
+			<xs:documentation>A risk management measure related to waste.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeasurePhrase" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the risk management measure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EffectivenessWasteInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Describes the method or measures to reduce the release of waste to the environment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ESComType">
+		<xs:annotation>
+			<xs:documentation>Specifies the object type which the ESComXML file represents.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PROD">
+				<xs:annotation>
+					<xs:documentation>Specifies the object type "Product" which the ESComXML file represents.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUB">
+				<xs:annotation>
+					<xs:documentation>Specifies the object type "Substance" which the ESComXML file represents.</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumericQualifier">
+		<xs:annotation>
+			<xs:documentation>Specifies permitted numeric operators that qualify a numeric value.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EQ"/>
+			<xs:enumeration value="GE"/>
+			<xs:enumeration value="GT"/>
+			<xs:enumeration value="LE"/>
+			<xs:enumeration value="LT"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UseCondQuantitativeWithUnit">
+		<xs:annotation>
+			<xs:documentation>An operational condition of a use specified as a phrase with a value. The value is a numeric value with unit and qualifier. The numeric value is patterned according to the IEEE single-precision 64-bit floating point type.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ConditionPhrase" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A phrase that describes the operational condition.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value" type="ESCOMXML:NumericValueWithUnit" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A numerical value with unit and qualifier that quantifies (associates a value) the condition phrase.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ESSection2Head">
+		<xs:annotation>
+			<xs:documentation>Specifies the sub headers of section 2 for exposure scenarios:
+
+AFD:
+Amount used (or contained in articles), frequency and duration of use/exposure
+
+AGPA:
+Additional good practice advice
+
+OOC:
+Other conditions 
+
+PC:
+Product (article) characteristics
+
+PPE:
+Conditions and measures related to personal protection, hygiene and health evaluation
+
+STP:
+Conditions and measures related to sewage treatment plant
+
+TOM:
+Technical and organizational conditions and measures
+
+WASTE:
+Conditions and measures related to treatment of waste (incl. article waste)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AFD"/>
+			<xs:enumeration value="AGPA"/>
+			<xs:enumeration value="OOC"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="PPE"/>
+			<xs:enumeration value="STP"/>
+			<xs:enumeration value="TOM"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ESSectionSubHeader">
+		<xs:annotation>
+			<xs:documentation>Defines the abbreviations of headings of section 2 for the exposure scenario for communication.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AFD"/>
+			<xs:enumeration value="AGPA"/>
+			<xs:enumeration value="OOC"/>
+			<xs:enumeration value="PC"/>
+			<xs:enumeration value="PPE"/>
+			<xs:enumeration value="STP"/>
+			<xs:enumeration value="TOM"/>
+			<xs:enumeration value="WASTE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="URL">
+		<xs:annotation>
+			<xs:documentation>Specifies a URL.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+</xs:schema>

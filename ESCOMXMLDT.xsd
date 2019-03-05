@@ -449,7 +449,7 @@ Note that this data element does not provide details about the unit of measure t
 					<xs:documentation>Specifies the measure and the degree in % to which the measure to reduce the release to soil is effective.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="EffectivenessWaterlInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
+			<xs:element name="EffectivenessWaterInPercent" type="ESCOMXML:EffectivenessValueWithQualifier" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Specifies the measure and the degree in % to which the measure to reduce the release to water is effective.</xs:documentation>
 				</xs:annotation>

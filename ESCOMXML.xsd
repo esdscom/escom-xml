@@ -1005,7 +1005,7 @@ Expected value: Phrase or numeric value or both</xs:documentation>
 Expected value: UUID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="Sperc" type="ESCOMXML:String255">
+			<xs:element minOccurs="0" name="SpercCode" type="ESCOMXML:String255">
 				<xs:annotation>
 					<xs:documentation>SpERC = Specific Environmental Release Category</xs:documentation>
 				</xs:annotation>

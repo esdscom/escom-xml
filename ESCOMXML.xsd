@@ -170,9 +170,9 @@ Expected value: Phrase</xs:documentation>
 Expected value: UUID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="SpercCode" type="ESCOMXML:String255">
+			<xs:element minOccurs="0" name="Sperc" type="ESCOMXML:Phrase">
 				<xs:annotation>
-					<xs:documentation>SpERC = Specific Environmental Release Category</xs:documentation>
+					<xs:documentation>SpERC = Specific Environmental Release Category. The phrase text is expected to hold the wording, the phrase OriginalCode is expected to hold the SpERC code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ContributingScenarioName" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
@@ -300,9 +300,9 @@ Expected value: Phrase or numeric value or both</xs:documentation>
 Expected value: UUID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="ScedCode" type="ESCOMXML:String255">
+			<xs:element minOccurs="0" name="Sced" type="ESCOMXML:Phrase">
 				<xs:annotation>
-					<xs:documentation>SCED = Specific Consumer Exposure Description</xs:documentation>
+					<xs:documentation>SCED = Specific Consumer Exposure Description. The phrase text is expected to hold the wording, the phrase OriginalCode is expected to hold the SCED code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ContributingScenarioName" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
@@ -679,9 +679,9 @@ Expected value: Numeric value</xs:documentation>
 Expected value: UUID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="SwedCode" type="ESCOMXML:String255">
+			<xs:element minOccurs="0" name="Swed" type="ESCOMXML:Phrase">
 				<xs:annotation>
-					<xs:documentation>SWED = Specific Worker Exposure Description</xs:documentation>
+					<xs:documentation>SWED = Specific Worker Exposure Description. The phrase text is expected to hold the wording, the phrase OriginalCode is expected to hold the SWED code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ContributingScenarioName" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
@@ -1005,9 +1005,9 @@ Expected value: Phrase or numeric value or both</xs:documentation>
 Expected value: UUID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element minOccurs="0" name="SpercCode" type="ESCOMXML:String255">
+			<xs:element minOccurs="0" name="Sperc" type="ESCOMXML:Phrase">
 				<xs:annotation>
-					<xs:documentation>SpERC = Specific Environmental Release Category</xs:documentation>
+					<xs:documentation>SpERC = Specific Environmental Release Category. The phrase text is expected to hold the wording, the phrase OriginalCode is expected to hold the SpERC code.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ContributingScenarioName" type="ESCOMXML:Phrase" minOccurs="1" maxOccurs="unbounded">
@@ -1044,14 +1044,6 @@ Expected value: Phrase</xs:documentation>
 			<xs:element name="ExposureEstimationAdditionalDetails" type="ESCOMXML:ExposureEstimationAdditionalDetails" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="ESCOMXML" type="ESCOMXML:ESCOMXML_TOP">
-		<xs:annotation>
-			<xs:documentation>The basic structure of ESComXML is based on the ESCOMXML_TOP element for root information. 
-Each ESComXML document is based on one or more exposure scenarios related to a substance or a product.
-
-Exposure scenarios and their contributing scenarios define the conditions and risk management measures for the safe use of a substance or a product. An exposure scenario contains conditions of use for worker or consumer activities.</xs:documentation>
-		</xs:annotation>
-	</xs:element>
 	<xs:complexType name="ScalingToolDetails">
 		<xs:annotation>
 			<xs:documentation>Section that provides details about a scaling tool used in section 4 as additional advice to the downstream users, if appropriate.</xs:documentation>
@@ -1136,4 +1128,12 @@ Expected value: Phrase</xs:documentation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="ESCOMXML" type="ESCOMXML:ESCOMXML_TOP">
+		<xs:annotation>
+			<xs:documentation>The basic structure of ESComXML is based on the ESCOMXML_TOP element for root information. 
+Each ESComXML document is based on one or more exposure scenarios related to a substance or a product.
+
+Exposure scenarios and their contributing scenarios define the conditions and risk management measures for the safe use of a substance or a product. An exposure scenario contains conditions of use for worker or consumer activities.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 </xs:schema>

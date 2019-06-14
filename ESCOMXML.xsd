@@ -127,23 +127,17 @@ Expected value: Order number</xs:documentation>
 			</xs:element>
 			<xs:element name="SectorOfUse" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Describes the sectors of use that apply to an exposure scenario with the aim to give information on the scope, e.g. in which markets the product is used or in which the activity takes place. This description is made via the Use Descriptor System defined in chapter R.12 of the ECHA guidance on Information requirements.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the sectors of use (SU) that apply to an exposure scenario with the aim to give information on the scope, e.g. in which markets the product is used or in which the activity takes place. The list of SUs is available in the Use Descriptor System defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="MarketInformationProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Describes the product categories that apply to an exposure scenario to give information on the scope, e.g. in which product(s) the substance is used. This description is made via the Use Descriptor System defined in chapter R.12 of the ECHA guidance on information requirements.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the product categories (PC) that apply to an exposure scenario to give information on the scope, e.g. in which product(s) the substance is used. The list of PCs is available in the Use Descriptor System defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="MarketInformationArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Describes the article categories that apply to an exposure scenario to give information on the scope, e.g. in which articles(s) the substance is used or ends up in. This description is made via the Use Descriptor System defined in chapter R.12 of the ECHA guidance on information requirements.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the article categories (AC) that apply to an exposure scenario to give information on the scope, e.g. in which articles(s) the substance is used or ends up in. The list of ACs is available in the Use Descriptor System defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element minOccurs="0" name="UseMapUseCode" type="ESCOMXML:String255">
@@ -321,9 +315,7 @@ Expected value: Order number </xs:documentation>
 			</xs:element>
 			<xs:element name="ArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Describes the article categories that are covered by the assessment described in the specific contributing scenario. This description is made via the Use Descriptor System defined in chapter R.12 of the ECHA guidance on information requirements.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the article categories (AC) that are covered by the assessment described in the specific contributing scenario. The list of ACs is available in the Use Descriptor System defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ArticleSubCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
@@ -335,9 +327,7 @@ Expected value: Phrase</xs:documentation>
 			</xs:element>
 			<xs:element name="ProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Describes the product categories that are covered by the assessment described in the specific contributing scenario. This description is made via the Use Descriptor System defined in chapter R.12 of the ECHA guidance on information requirements.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the product categories (PC) that are covered by the assessment described in the specific contributing scenario.  The list of PCs is available in the Use Descriptor System defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ProductSubCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
@@ -1074,56 +1064,35 @@ Expected value: Web address</xs:documentation>
 	</xs:complexType>
 	<xs:complexType name="ExposureScenarioStructuredShortTitle">
 		<xs:annotation>
-			<xs:documentation>Section that provides the structured short title (SST) of an exposure scenario for communication. An exposure scenario structured short title is a sequence of identifiers which are taken from the data contained in the exposure scenario itself. Its main purpose is provide a comprehensible description of the ES content that makes it possible to distinguish between the different ESs within one safety data sheet. It also helps downstream users identify ESs relevant to their sector or activity in the SDS annex.</xs:documentation>
+			<xs:documentation>Section that provides the structured short title (SST) of an exposure scenario for communication, as defined in http://www.ducc.eu/documents/StructuredShortTitles%20for%20publication%20041114%20final.pdf . An exposure scenario structured short title is a sequence of identifiers which are taken from the data contained in the exposure scenario itself. Its main purpose is provide a comprehensible description of the ES content that makes it possible to distinguish between the different ESs within one safety data sheet, so the SST result for one ES may vary if the algorithm is applied to different sets of exposure scenarios. It helps downstream users identify ESs relevant to their sector or activity in the SDS annex.
+The SST makes use of PCs, ACs and SUs from EChA's Use Descriptor System, defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="SSTMarketInformationProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+			<xs:element name="LifeCycleStage" type="ESCOMXML:Phrase">
 				<xs:annotation>
-					<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case  Product (article) characteristics (PCs) are relevant.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Defines the Life Cycle Stage (formulation, industrial use, professional use, consumer use, service life consumer, service life worker) as defined in rule 1.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="SSTMarketInformationProductCategoryCodes" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Specifies which PCs have to be included in the SST in case there are several relevant for the ES.
-
-Expected value: Phrase</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SSTMarketInformationArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case  article categories (ACs) are relevant.
-
-Expected value: Phrase</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SSTMarketInformationArticleCategoryCodes" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Specifies which ACs have to be included in the SST in case there are several relevant for the ES.
-
-Expected value: Phrase</xs:documentation>
-				</xs:annotation>
-			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="SSTMarketInformationProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Product Categories (PCs) are relevant, as defined in rule 1.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SSTMarketInformationArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+					<xs:annotation>
+						<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Article Categories (ACs) are relevant, as defined in rule 1.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 			<xs:element name="SSTMarketInformationSectorOfUse" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Describes the sector of use considered by the calculation of the structured short title for an exposure scenario.
-
-Expected value: Phrase</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="SSTMarketInformationSectorOfUseCodes" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
-				<xs:annotation>
-					<xs:documentation>Describes the codes of those sectors of use considered by the calculation of the structured short title for an exposure scenario.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>Describes the sector of use (SU) considered by the calculation of the structured short title for an exposure scenario as defined in rule 2.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SSTAdditionalInformation" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>The field conveys the phrase that consitutes the third identifier for the SST.
-
-Expected value: Phrase</xs:documentation>
+					<xs:documentation>The field conveys the phrases that consitute the third identifier for the SST as defined in rules 3.1 and 3.2</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

@@ -1064,7 +1064,9 @@ Expected value: Web address</xs:documentation>
 	</xs:complexType>
 	<xs:complexType name="ExposureScenarioStructuredShortTitle">
 		<xs:annotation>
-			<xs:documentation>Section that provides the structured short title (SST) of an exposure scenario for communication, as defined in http://www.ducc.eu/documents/StructuredShortTitles%20for%20publication%20041114%20final.pdf . An exposure scenario structured short title is a sequence of identifiers which are taken from the data contained in the exposure scenario itself. Its main purpose is provide a comprehensible description of the ES content that makes it possible to distinguish between the different ESs within one safety data sheet, so the SST result for one ES may vary if the algorithm is applied to different sets of exposure scenarios. It helps downstream users identify ESs relevant to their sector or activity in the SDS annex.
+			<xs:documentation>Section that provides the structured short title (SST) of an exposure scenario for communication, as defined in http://www.ducc.eu/documents/StructuredShortTitles%20for%20publication%20041114%20final.pdf . Please consult this document for further details on proper field values, especially regarding application of AC/PC/SU codes.
+
+An exposure scenario structured short title is a sequence of identifiers which are taken from the data contained in the exposure scenario itself. Its main purpose is provide a comprehensible description of the ES content that makes it possible to distinguish between the different ESs within one safety data sheet, so the SST result for one ES may vary if the algorithm is applied to different sets of exposure scenarios. It helps downstream users identify ESs relevant to their sector or activity in the SDS annex.
 The SST makes use of PCs, ACs and SUs from EChA's Use Descriptor System, defined in chapter R.12 of the ECHA Guidance on Information Requirements and Chemical Safety Assessment.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
@@ -1074,20 +1076,39 @@ The SST makes use of PCs, ACs and SUs from EChA's Use Descriptor System, defined
 				</xs:annotation>
 			</xs:element>
 			<xs:choice minOccurs="0">
-				<xs:element name="SSTMarketInformationProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
-					<xs:annotation>
-						<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Product Categories (PCs) are relevant, as defined in rule 1.</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="SSTMarketInformationArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
-					<xs:annotation>
-						<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Article Categories (ACs) are relevant, as defined in rule 1.</xs:documentation>
-					</xs:annotation>
-				</xs:element>
+				<xs:sequence minOccurs="0">
+					<xs:element name="SSTMarketInformationProductCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Product Categories (PCs) are relevant, as defined in rule 1.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="SSTMarketInformationProductCategoryCodes" type="ESCOMXML:UseDescriptorCode">
+						<xs:annotation>
+							<xs:documentation>Values for printing PC codes, as intended by the author of the Structured Short Title.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:sequence minOccurs="0">
+					<xs:element name="SSTMarketInformationArticleCategory" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Phrase that constitutes the first part of the second identifier of the short title, in case Article Categories (ACs) are relevant, as defined in rule 1.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="SSTMarketInformationArticleCategoryCodes" type="ESCOMXML:UseDescriptorCode">
+						<xs:annotation>
+							<xs:documentation>Values for printing AC codes, as intended by the author of the Structured Short Title.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
 			</xs:choice>
 			<xs:element name="SSTMarketInformationSectorOfUse" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Describes the sector of use (SU) considered by the calculation of the structured short title for an exposure scenario as defined in rule 2.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="SSTMarketInformationSectorOfUseCodes" type="ESCOMXML:UseDescriptorCode">
+				<xs:annotation>
+					<xs:documentation>Values for printing SU codes, as intended by the author of the Structured Short Title.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SSTAdditionalInformation" type="ESCOMXML:Phrase" minOccurs="0" maxOccurs="unbounded">

@@ -370,7 +370,7 @@ http://en.wikipedia.org/wiki/Universally_unique_identifier</xs:documentation>
 			<xs:documentation>Specifies the ESComXML version number for which the XML file is valid.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="2.0"/>
+			<xs:enumeration value="2.1"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="UseCondQuantitative">
